@@ -5,10 +5,19 @@ wb=openpyxl.load_workbook("C:/Users/patyp/OneDrive/Documentos/ArchivosXLS/Emplea
 #WorkSheet u Hoja activa de Excel
 ws = wb.active 
 
-
+def validacion():
+     while True:
+          try:
+               opcion=int(input("Digite una opcion \U0001F449: "))
+               if 1<=opcion<=6:
+                    return opcion
+               else:
+                    print("Tienes que seleccionar un número válido")
+          except ValueError:
+               print("Repito tiene que ser un número")  
 def ppal(): 
   empleadoData=[]
-  opcion=0
+  opcion=validacion()
   while opcion!=6:  
     print(" ")
     print("1. Alta")
@@ -16,10 +25,8 @@ def ppal():
     print("3. Dar de baja un empleado")
     print("4. Consulta de empleado")
     print("5. Sanciones y actualización de sueldo por quincena")
-    
     print("6: Salir del programa")
     opcion=int(input("Digite una opcion \U0001F449: "))
-
     match(opcion):
     #--------------------AGREGAR EMPLEADO----------------------    
         case(1):
