@@ -6,15 +6,16 @@ wb = openpyxl.load_workbook("Empleados.xlsx")
 ws = wb.active 
 
 def validacion():
-     while True:
-          try:
-               opcion=int(input("Digite una opcion \U0001F449: "))
-               if 1<=opcion<=6:
-                    return opcion
-               else:
-                    print("Tienes que seleccionar un número válido")
-          except ValueError:
-               print("Repito tiene que ser un número")  
+    while True:
+        try:
+            opcion=int(input("\nDigite una opcion \U0001F449: "))
+            if 1<=opcion<=6:
+                return opcion
+            else:
+                print("Tienes que seleccionar un número válido")
+        except ValueError:
+            print("Debe ser un número entero y positivo")  
+    
 def ppal(): 
   empleadoData=[]
   opcion=validacion()
@@ -34,7 +35,7 @@ def ppal():
             #Verificación de la cantidad de datos
             CantMAXfilas=ws.max_row
             CantMAXcol=ws.max_column
-            print("Filas: ",CantMAXfilas," Columnas: ",CantMAXcol)
+            print("Cantidad de Empleados: ",CantMAXfilas," Numero de Datos: ",CantMAXcol)
             
             print("Se agregará un nuevo empleado al registro")
             numeroe=int(input("Escriba el numero del empleado:"))
@@ -172,7 +173,7 @@ def ppal():
                 else:
                      print("Debe imprimir también los que NO tienen sanción junto con su sueldo")
                      
-        case _:
+        case (6):
             print("Saliendo del programa ")
             
 if __name__=="__main__":
