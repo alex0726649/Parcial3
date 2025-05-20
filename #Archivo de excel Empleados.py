@@ -44,7 +44,7 @@ def ppal():
             columna = ws['A']
             repetido = any(cell.value == numeroe for cell in columna)
             if repetido:
-                print('\n\033[91mEste empleado ya existe en la base de datos\033[0m')
+                print('\n\033[91mEste empleado ya existe en la base de datos\033[0m\n\n\n')
                 
                 
             else:
@@ -66,8 +66,8 @@ def ppal():
             CantMAXfilas=ws.max_row
             CantMAXcol=ws.max_column
             conteof=0
-            print("Modificarás un elemento")
-            print("Recordar que el número de empleado no se podrá modificar")
+            print("\n\033[91mModificarás un elemento\033[0m")
+            print("Recuerda que el número de empleado no se podrá modificar")
             numeroe=input("Numero de empleado: ")
             for row in ws:
                 num_emplea=row[0].value #primer elemento de una fila
@@ -81,43 +81,69 @@ def ppal():
                     print("2. Apellidos")
                     print("3. Corregir retraso")
                     print("4. Cambiar Estatus")
-                    OPmenumodif=int(input("Seleccione una opción a modificar: "))
-                    match(OPmenumodif):
-                        case(1): 
-                            #Modificar nombre
-                            nombrenuevo=input("Teclee el(los) nuevo(s) nombre(s): ")
-                            ws.cell(row=numfila, column=2, value=nombrenuevo) #accediendo al numero de fila indicado en la columna 2 colocando el valor nuevo en esa celda
-                            wb.save("Empleados.xlsx") #se guardan los cambios en el archivo
-                            print("El nombre del empleado ",numeroe," se actualizó a ")
-                            valornuevo = ws.cell(row=numfila, column=2).value
-                            print(valornuevo)
-                            print("\U0001F44D")
-                            break
-                        case(2):
-                             #Modificar Apellidos
-                            apellidonuevo=input("Teclee el(los) nuevo(s) apellido(s): ")
-                            ws.cell(row=numfila, column=3, value=apellidonuevo)
-                            wb.save("Empleados.xlsx") #se guardan los cambios en el archivo
-                            print("El(los) apellido(s) del empleado ",numeroe," se actualizó a: ")
-                            valornuevo = ws.cell(row=numfila, column=3).value
-                            print(valornuevo)
-                            print("\U0001F44D")
-                            break   
-                        case(3):
-                            #Modificar retardos
-                            print("Modificar la cantidad de retrasos, esto sucede cuando se justifican")
-                            print("La cantidad de retrasos es de 1 a 3")
-                            print("\U0001F480") 
-                            break
-                        case(4):
-                            #Modificar Estatus
-                            print("Cambiar estatus solo admite A= Activo I=incapacitado")
-                            break
-                        case _:
-                            print("Opción no válida")
-                            break
+                    try:
+                        OPmenumodif=int(input("Seleccione una opción a modificar: "))
+                        match(OPmenumodif):
+                            case(1): 
+                                #Modificar nombre
+                                nombrenuevo=input("Teclee el(los) nuevo(s) nombre(s): ")
+                                ws.cell(row=numfila, column=2, value=nombrenuevo) #accediendo al numero de fila indicado en la columna 2 colocando el valor nuevo en esa celda
+                                wb.save("Empleados.xlsx") #se guardan los cambios en el archivo
+                                print("El nombre del empleado ",numeroe," se actualizó a ")
+                                valornuevo = ws.cell(row=numfila, column=2).value
+                                print(valornuevo)
+                                print("\U0001F44D")
+                                break
+                            case(2):
+                                #Modificar Apellidos
+                                apellidonuevo=input("Teclee el(los) nuevo(s) apellido(s): ")
+                                ws.cell(row=numfila, column=3, value=apellidonuevo)
+                                wb.save("Empleados.xlsx") #se guardan los cambios en el archivo
+                                print("El(los) apellido(s) del empleado ",numeroe," se actualizó a: ")
+                                valornuevo = ws.cell(row=numfila, column=3).value
+                                print(valornuevo)
+                                print("\U0001F44D")
+                                break   
+                            case(3):
+                                #Modificar retardos
+                                
+                                retardos = ws.cell(row=conteof, column=6).value
+                                asistencias = ws.cell(row=conteof, column=5).value
+                                print(f'\n\n\033[94mNúmero de retardos: \033[0m{retardos}')
+                                if retardos < 1:   
+                                    print('Los retardos ya están en el mínimo')
+
+                                else:
+                                    print("\033[1mModificación de retardos\033[0m")
+                                    ciclo = True
+                                    while ciclo:
+                                        try:
+                                            justificaciones = int(input('\nIngrese el nuevo número de retardos (solamente se pueden disminuir): '))
+                                            if justificaciones >= 0 and justificaciones <= 2 and justificaciones != retardos and justificaciones < retardos:
+                                                print(f'\n\033[92mEl número de retardos se ha modificado a {justificaciones}\033[0m')
+                                                ws.cell(row=conteof, column=6, value=justificaciones)
+                                                asistenciaFinal = (retardos - justificaciones) + asistencias
+                                                ws.cell(row=conteof, column=5, value=(asistenciaFinal))
+                                                wb.save("Empleados.xlsx")
+                                                ciclo = False
+                                            else:
+                                                print('\n\nEl nuevo número de retardos debe tener un rango de 0 a 2 y debe ser menor a el numero de retardos anterior')
+
+                                        except ValueError:
+                                            print('Ingrese un valor válido')
+
+                                break
+                            case(4):
+                                #Modificar Estatus
+                                print("Cambiar estatus solo admite A= Activo I=incapacitado")
+                                break
+                            case _:
+                                print("\033[91mOpción no válida\033[0m")
+                                break
+                    except ValueError:
+                        print('\n\033[91mIngresa un valor válido\033[0m')
             if conteof==CantMAXfilas:
-                    print("Empleado no encontrado \U0001F633")
+                    print("\033[94mEmpleado no encontrado \U0001F633\033[0m\n\n")
     #-----------BAJA-----------------------------------------------------------------
         case(3): 
             #BAJA de empleado
