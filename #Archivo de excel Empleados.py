@@ -36,22 +36,30 @@ def ppal():
             #Verificación de la cantidad de datos
             CantMAXfilas=ws.max_row
             CantMAXcol=ws.max_column
-            print("Cantidad de Empleados: ",CantMAXfilas," Numero de Datos: ",CantMAXcol)
+            print("\nCantidad de Empleados: ",CantMAXfilas," Número de Datos: ",CantMAXcol)
             
             print("Se agregará un nuevo empleado al registro")
-            numeroe=int(input("Escriba el numero del empleado:"))
-            nombres=input("Escriba el nombre o nombres (no apellidos) del empleado:")
-            apellidos=input("Escriba el o los apellidos del empleado: ")
-            print(" se Agrego a : ",numeroe,nombres,apellidos)
-            empleadoData.append(numeroe) #NUMERO EMPLEADO
-            empleadoData.append(nombres) #NOMBRE
-            empleadoData.append(apellidos) #APELLIDO
-            empleadoData.append("A")#ESTATUS
-            empleadoData.append(1)  #ASISTENCIA 
-            empleadoData.append(0)  #RETARDO
-            print(empleadoData)
-            ws.append(empleadoData)
-            wb.save("Empleados.xlsx")  #se guardan los cambios en el archivo
+            numeroe=input("\nEscriba el numero del empleado:")
+            # -----------VERIFICAR QUE EL EMPLEADO NO EXISTA----------
+            columna = ws['A']
+            repetido = any(cell.value == numeroe for cell in columna)
+            if repetido:
+                print('\n\033[91mEste empleado ya existe en la base de datos\033[0m')
+                
+                
+            else:
+                nombres=input("Escriba el nombre o nombres (no apellidos) del empleado:")
+                apellidos=input("Escriba el o los apellidos del empleado: ")
+                print(" se Agrego a : ",numeroe,nombres,apellidos)
+                empleadoData.append(numeroe) #NUMERO EMPLEADO
+                empleadoData.append(nombres) #NOMBRE
+                empleadoData.append(apellidos) #APELLIDO
+                empleadoData.append("A")#ESTATUS
+                empleadoData.append(1)  #ASISTENCIA 
+                empleadoData.append(0)  #RETARDO
+                print(empleadoData)
+                ws.append(empleadoData)
+                wb.save("Empleados.xlsx")  #se guardan los cambios en el archivo
     #----------MODIFICAR ELEMENTO--------------------------------------------------------------------        
         case(2):
             #Modificar un elemento
@@ -173,7 +181,8 @@ def ppal():
                      print("El empleado ",num_emplea," ",nombre_emplea," ",apellidos_emplea," tiene de sueldo: ",sueldo_nuevo)
                 else:
                      print("Debe imprimir también los que NO tienen sanción junto con su sueldo")
-                     
+
+        # -------------SALIR DEL PROGRAMA------------------            
         case (6):
             print("Saliendo del programa ")
             
