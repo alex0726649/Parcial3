@@ -18,8 +18,9 @@ def validacion():
     
 def ppal(): 
   empleadoData=[]
-  opcion=validacion()
-  while opcion!=6:  
+  opcion=0
+  while opcion!=6: 
+    print('Bienvenido al programa de administración de empleados') 
     print(" ")
     print("1. Alta")
     print("2. Modificación")
@@ -27,7 +28,7 @@ def ppal():
     print("4. Consulta de empleado")
     print("5. Sanciones y actualización de sueldo por quincena")
     print("6: Salir del programa")
-    opcion=int(input("Digite una opcion \U0001F449: "))
+    opcion=validacion()
     match(opcion):
     #--------------------AGREGAR EMPLEADO----------------------    
         case(1):
