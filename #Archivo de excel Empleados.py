@@ -1,4 +1,4 @@
- #Archivo de excel Empleados.xlsx
+#Archivo de excel Empleados.xlsx
 import openpyxl
 #Workbook o libro de excel:
 wb = openpyxl.load_workbook("Empleados.xlsx")
@@ -9,7 +9,7 @@ def validacion():
     while True:
         try:
             opcion=int(input("\nDigite una opcion \U0001F449: "))
-            if 1<=opcion<=6:
+            if 1<=opcion<=7:
                 return opcion
             else:
                 print("Tienes que seleccionar un número válido")
@@ -19,7 +19,7 @@ def validacion():
 def ppal(): 
   empleadoData=[]
   opcion=0
-  while opcion!=6: 
+  while opcion!=7: 
     print('Bienvenido al programa de administración de empleados') 
     print(" ")
     print("1. Alta")
@@ -107,7 +107,6 @@ def ppal():
                                 break   
                             case(3):
                                 #Modificar retardos
-                                
                                 retardos = ws.cell(row=conteof, column=6).value
                                 asistencias = ws.cell(row=conteof, column=5).value
                                 print(f'\n\n\033[94mNúmero de retardos: \033[0m{retardos}')
@@ -137,6 +136,20 @@ def ppal():
                             case(4):
                                 #Modificar Estatus
                                 print("Cambiar estatus solo admite A= Activo I=incapacitado")
+                                estatus = ws.cell(row=conteof, column=4).value
+                                print("El estatus actual del trabajador es: ", estatus)
+                                while True:
+                                    try:
+                                        nestatus = input("Ingresa el nuevo estatus para el empleado A (activo) I (incapacitado): ").upper()
+                                        if nestatus in ["A", "I"]:
+                                            ws.cell(row=conteof, column=4, value=nestatus)
+                                            wb.save("Empleados.xlsx")
+                                            print("El estatus del trabajador se modificó a: ", nestatus)
+                                            break
+                                        else:
+                                            print("Solo se permite 'A' (Activo) o 'I' (Incapacitado). Intente de nuevo.")
+                                    except Exception as e:
+                                        print("Recuerde las unicas opciones que se permiten:", e)
                                 break
                             case _:
                                 print("\033[91mOpción no válida\033[0m")
@@ -212,6 +225,15 @@ def ppal():
         # -------------SALIR DEL PROGRAMA------------------            
         case (6):
             print("Saliendo del programa ")
+        case (7):
+            print("El nombre del equipo es: Equipo Milaneso \U0001F60E")
+            print(
+                "Los integrantes del equipo son: \n"
+                "José Alejandro Pérez Millán-Matricula: 385570\n"
+                "Luis Felipe Domínguez Chávez-Matricula: 385500\n"
+                "Alexander Chacón Ramírez-Matricula: 385540\n"
+                "Diego Flores Verdad Grijalva-Matricula: 385660"
+            )
             
 if __name__=="__main__":
   ppal()  
