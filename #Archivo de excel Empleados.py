@@ -14,7 +14,7 @@ def validacion():
             else:
                 print("Tienes que seleccionar un número válido")
         except ValueError:
-            print("Debe ser un número entero y positivo")  
+            print("Seleccione una opción")  
     
 def ppal(): 
   empleadoData=[]
@@ -28,6 +28,7 @@ def ppal():
     print("4. Consulta de empleado")
     print("5. Sanciones y actualización de sueldo por quincena")
     print("6: Salir del programa")
+    print("7: Integrantes del proyecto" )
     opcion=validacion()
     match(opcion):
     #--------------------AGREGAR EMPLEADO----------------------    
@@ -105,9 +106,30 @@ def ppal():
                             break   
                         case(3):
                             #Modificar retardos
-                            print("Modificar la cantidad de retrasos, esto sucede cuando se justifican")
+                            retardos_actuales= ws.cell(row=numfila, column=6).value
+                            print("La cantidad de retardos es: ", retardos_actuales)
+                            print("Modificar la cantidad de retardos, esto sucede cuando se justifican")
                             print("La cantidad de retrasos es de 1 a 3")
-                            print("\U0001F480") 
+                            print("Recuerda que solo puedes disminuir la cantidad de retardos")
+                            try:
+                                cant_retardos=int(input("Escriba cuantos retardos tiene ahora el empleado"))
+                            except ValueError:
+                                print("Ingresa un número porfas")
+                            if cant_retardos <0 or cant_retardos >2:
+                                print("El número nuevo de retardos debe estar entre 0 y 2")
+                            elif cant_retardos==0:
+                                print("El empleado ya cuenta con 0 retardos no puedes disminuirlos más")
+                            elif cant_retardos>retardos_actuales:
+                                print("Recuerda que no puedes disminuir la cantidad de retardos que tiene el empleado")
+                            elif cant_retardos==retardos_actuales:
+                                print("La cantidad de retardos no cambió")
+                            else:
+                                ws.cell(row=numfila, column=6, value=cant_retardos)
+                                wb.save("Empleados.xlsx")
+                                print("La cantidad de retardos del empleado se modifico a: ", cant_retardos)
+                                valornuevo= ws.cell(row=numfila, column=6).value
+                                print(valornuevo)  
+                                print("\U0001F480") 
                             break
                         case(4):
                             #Modificar Estatus
