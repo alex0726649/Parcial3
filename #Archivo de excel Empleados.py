@@ -19,7 +19,7 @@ def validacion():
 def ppal(): 
   empleadoData=[]
   opcion=0
-  while opcion!=7: 
+  while opcion!=6: 
     print('Bienvenido al programa de administración de empleados') 
     print(" ")
     print("1. Alta")
@@ -206,10 +206,10 @@ def ppal():
             CantMAXfilas=ws.max_row
             CantMAXcol=ws.max_column
             print("Actualizar sanciones")
-            for i in range(2,CantMAXfilas): #Desde 1 hasta (1 hasta max cantidad de columnas)
+            i=1
+            for i in range(1, CantMAXfilas+1): #Desde 1 hasta (1 hasta max cantidad de columnas)
                 cant_retardos=ws.cell(row=i,column=6).value #columna de retardos
                 if cant_retardos==3:
-                     
                      num_emplea= ws.cell(row=i, column=1).value
                      nombre_emplea= ws.cell(row=i, column=2).value
                      apellidos_emplea= ws.cell(row=i, column=3).value
@@ -218,9 +218,15 @@ def ppal():
                      ws.cell(row=i, column=8, value=sueldo_actual)
                      wb.save("Empleados.xlsx")#se guardan los cambios en el archivo
                      sueldo_nuevo = ws.cell(row=i, column=8).value 
-                     print("El empleado ",num_emplea," ",nombre_emplea," ",apellidos_emplea," tiene de sueldo: ",sueldo_nuevo)
+                     print("El empleado ",num_emplea," ",nombre_emplea," ",apellidos_emplea," tiene de sueldo: ",sueldo_nuevo, "tiene una sancion de 10%: ", "porque tiene la cantidad de retardos de: ",cant_retardos)
                 else:
-                     print("Debe imprimir también los que NO tienen sanción junto con su sueldo")
+                     num_emplea= ws.cell(row=i, column=1).value
+                     nombre_emplea= ws.cell(row=i, column=2).value
+                     apellidos_emplea=ws.cell(row=i, column=3).value
+                     sueldo_actual=21000
+                     ws.cell(row=i, column=8, value=sueldo_actual)
+                     wb.save("Empleados.xlsx")
+                     print("El empleado",num_emplea,"",nombre_emplea,"",apellidos_emplea, "tiene de sueldo: ",sueldo_actual)
 
         # -------------SALIR DEL PROGRAMA------------------            
         case (6):
