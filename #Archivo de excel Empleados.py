@@ -189,14 +189,15 @@ def ppal():
                 num_emplea=row[0].value #primer elemento de una fila
                 conteof=conteof+1       #cuanta la cantidad de filas (cantidad de veces que se ejecuta el for)
                 if num_emplea==numeroe:
-                        print("El empleado se encontró")
+                        print("El empleado se encontró:")
                         numfila=conteof
-                        print(numfila)
+                        print('\033[1mRenglón: \033[0m',numfila)
                         break #Ya encontrado el emppleado se interrumpe el for
+            informacion = ['','Número de empleado','Nombre(s)','Apellido(s)','Estatus','Asistencias','Retardos','Descuento de sueldo']
             for i in range(1,CantMAXcol): #Desde 1 hasta (1 hasta max cantidad de columnas)
                             valores_empleado=ws.cell(row=numfila,column=i).value 
-                            print(valores_empleado)
-            
+                            print(f'\033[1m{informacion[i]}:\033[0m {valores_empleado}')
+            print('\n\n')
             #Se debe agregar la consulta de todos los empleados (todas las filas y columnas)
 
 #--------------SANCIONES---------------------------------------------------------------------------
