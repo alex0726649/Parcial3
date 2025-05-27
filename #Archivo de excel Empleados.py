@@ -232,13 +232,13 @@ def ppal():
         case (6):
             print("Saliendo del programa ")
         case (7):
-            print("El nombre del equipo es: Equipo Milaneso \U0001F60E")
+            print("\n\nEl nombre del equipo es: Equipo Milaneso \U0001F60E")
             print(
                 "Los integrantes del equipo son: \n"
                 "José Alejandro Pérez Millán-Matricula: 385570\n"
                 "Luis Felipe Domínguez Chávez-Matricula: 385500\n"
                 "Alexander Chacón Ramírez-Matricula: 385540\n"
-                "Diego Flores Verdad Grijalva-Matricula: 385660"
+                "Diego Flores Verdad Grijalva-Matricula: 385660\n"
             )
             
 if __name__=="__main__":
