@@ -139,18 +139,18 @@ def ppal():
                                 estatus = ws.cell(row=conteof, column=4).value
                                 print("El estatus actual del trabajador es: ", estatus)
                                 while True:
-                                    try:
                                         nestatus = input("Ingresa el nuevo estatus para el empleado A (activo) I (incapacitado): ").upper()
                                         if nestatus in ["A", "I"]:
-                                            ws.cell(row=conteof, column=4, value=nestatus)
-                                            wb.save("Empleados.xlsx")
-                                            print("El estatus del trabajador se modificó a: ", nestatus)
+                                            if nestatus == estatus:
+                                                print(f"El empleado ya tiene el estatus '{estatus}'. No se realizó ningún cambio.")
+                                            else:
+                                                ws.cell(row=conteof, column=4, value=nestatus)
+                                                wb.save("Empleados.xlsx")
+                                                print("El estatus del trabajador se modificó a: ", nestatus)
                                             break
                                         else:
                                             print("Solo se permite 'A' (Activo) o 'I' (Incapacitado). Intente de nuevo.")
-                                    except Exception as e:
-                                        print("Recuerde las unicas opciones que se permiten:", e)
-                                break
+                                 
                             case _:
                                 print("\033[91mOpción no válida\033[0m")
                                 break
