@@ -156,8 +156,9 @@ def ppal():
                                 break
                     except ValueError:
                         print('\n\033[91mIngresa un valor válido\033[0m')
+                    break
             if conteof==CantMAXfilas:
-                    print("\033[94mEmpleado no encontrado \U0001F633\033[0m\n\n")
+                print("\033[94mEmpleado no encontrado \U0001F633\033[0m\n\n")
     #-----------BAJA-----------------------------------------------------------------
         case(3): 
             #BAJA de empleado
